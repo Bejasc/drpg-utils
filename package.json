@@ -9,7 +9,8 @@
 	"types": "dist/index.d.ts",
 	"repository": "drpgdev/drpg-utils",
 	"files": [
-		"dist"
+		"dist",
+		"!dist/*.tsbuildinfo"
 	],
 	"keywords": [
 		"drpg",
