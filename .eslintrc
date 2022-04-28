@@ -1,0 +1,41 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "./tsconfig.json"
+	},
+	"plugins": ["@typescript-eslint", "no-loops", "promise", "unicorn", "sonarjs"],
+	"extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
+	"rules": {
+		"sonarjs/no-small-switch": 2,
+		"sonarjs/prefer-object-literal": 2,
+		"promise/prefer-await-to-then": 2,
+		"promise/catch-or-return": 2,
+		"promise/always-return": 2,
+		"promise/param-names": 2,
+		"sonarjs/max-switch-cases": 1,
+		"sonarjs/no-collection-size-mischeck": 1,
+		"sonarjs/cognitive-complexity": 1,
+		"no-loops/no-loops": 1,
+		"no-var": 1,
+		"promise/no-nesting": 1,
+		"unicorn/filename-case": [
+			"error",
+			{
+				"case": "pascalCase",
+				"ignore": ["index.ts", "\\.d.ts"]
+			}
+		],
+		"@typescript-eslint/array-type": 2,
+		"@typescript-eslint/no-explicit-any": 2,
+		"@typescript-eslint/await-thenable": 2,
+		"@typescript-eslint/promise-function-async": 2,
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"no-restricted-imports": [
+			"error",
+			{
+				"patterns": ["**/data/characters"]
+			}
+		]
+	}
+}
