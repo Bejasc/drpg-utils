@@ -2,9 +2,9 @@
 	"name": "@drpgdev/drpg-utils",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
-	  },
-	"version": "1.0.7",
-	"description": "Pretty logging for Discord.JS",
+	},
+	"version": "1.0.8",
+	"description": "Common functions used by the DRPG Suite",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"repository": "drpgdev/drpg-utils",

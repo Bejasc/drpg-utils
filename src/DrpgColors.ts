@@ -1,4 +1,4 @@
-export default {
+export const DrpgColors = {
 	green: "#4CAF50",
 	white: "#EEEEEE",
 	yellow: "#FFEA00",
