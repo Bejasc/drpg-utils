@@ -1,9 +1,9 @@
 {
 	"name": "@drpgdev/drpg-utils",
 	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
+		"registry": "https://npm.pkg.github.com/@drpgdev"
 	},
-	"version": "1.0.9",
+	"version": "1.1.0",
 	"description": "Common functions used by the DRPG Suite",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
