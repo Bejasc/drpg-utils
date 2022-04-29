@@ -3,7 +3,7 @@
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com/"
 	},
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "Common functions used by the DRPG Suite",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
