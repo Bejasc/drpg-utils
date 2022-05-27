@@ -38,26 +38,53 @@ function readJsonFile<T>(dir: string, joinDir = true): T {
 }
 
 /**
+ * NOTE: THis pathway is for a file where the contents are an ARRAY of T
  * Import JSON to a typed object array from the /data/ folder (outside of src)
- * @param packageName The name of the package you're trying to pull in, eg. 'attributes' will find all *.attributes.json
+ * @param pattern The name of the package you're trying to pull in, eg. 'attributes' will find all *.attributes.json
  * @returns
  */
-export async function readPackage<T>(packageName: string): Promise<T[]> {
+export async function readEntityList<T>(pattern: string): Promise<T[]> {
+	const attributes: T[] = [];
+
+	try {
+		const directoryPath = path.join(process.cwd(), "data");
+		const files: string[] = await getFiles(directoryPath, `${pattern}.json`);
+
+		files.map((file) => {
+			Logger.trace(`Searching for ${pattern}... found ${files.length} files`);
+			const data = readJsonFile<T[]>(file, false);
+			data.map((s) => attributes.push(s));
+		});
+	} catch (err) {
+		Logger.error(err, `ReadPackage of ${pattern} failed.`);
+	}
+
+	return attributes;
+}
+
+
+/**
+ * NOTE: THhis pathway is for a file where the contents are of any type extending from {@link ../types/IBasePackage.ts|IBasePackage}
+ * Import JSON to a typed object array from the /data/ folder (outside of src)
+ * @param pattern The name of the package you're trying to pull in, eg. 'attributes' will find all *.attributes.json
+ * @returns
+ */
+ export async function readEntityPackage<T>(pattern: string): Promise<T[]> {
 	//TODO introduce some kind of caching at this level?
 
 	const attributes: T[] = [];
 
 	try {
 		const directoryPath = path.join(process.cwd(), "data");
-		const files: string[] = await getFiles(directoryPath, `${packageName}.json`);
+		const files: string[] = await getFiles(directoryPath, `${pattern}.json`);
 
 		files.map((file) => {
-			Logger.trace(`Searching for ${packageName}... found ${files.length} files`);
-			const data = readJsonFile<T[]>(file, false);
-			data.map((s) => attributes.push(s));
+			Logger.trace(`Searching for ${pattern}... found ${files.length} files`);
+			const data = readJsonFile<T>(file, false);
+			attributes.push(data);
 		});
 	} catch (err) {
-		Logger.error(err, `ReadPackage of ${packageName} failed.`);
+		Logger.error(err, `ReadPackage of ${pattern} failed.`);
 	}
 
 	return attributes;
