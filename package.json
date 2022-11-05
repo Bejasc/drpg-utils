@@ -1,11 +1,11 @@
 {
 	"name": "drpg-utils",
 	"description": "Common functions used by the DRPG Suite",
-	"version": "1.2.1",
+	"version": "0.0.0-dev",
 	"author": "Bejasc",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/drpgdev/drpg-utils"
+		"url": "https://github.com/bejasc/drpg-utils"
 	},	
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
