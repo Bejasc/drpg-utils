@@ -1,3 +1,3 @@
-# DRPG Logger
+# DRPG Utils
 
 A variety of Utilities used by the DRPG Suite.

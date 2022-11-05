@@ -169,3 +169,7 @@ export function stringTitleCase(value: string): string {
 		.map((word) => word.charAt(0).toUpperCase() + word.substring(1))
 		.join(" ");
 }
+
+export function valueIsString(value: unknown): boolean {
+	return typeof value === "string";
+}

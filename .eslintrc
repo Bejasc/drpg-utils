@@ -2,7 +2,8 @@
 	"root": true,
 	"parser": "@typescript-eslint/parser",
 	"parserOptions": {
-		"project": "./tsconfig.json"
+		"project": "./tsconfig.json",
+		"ecmaVersion": 2020
 	},
 	"plugins": ["@typescript-eslint", "no-loops", "promise", "unicorn", "sonarjs"],
 	"extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
@@ -30,12 +31,6 @@
 		"@typescript-eslint/no-explicit-any": 2,
 		"@typescript-eslint/await-thenable": 2,
 		"@typescript-eslint/promise-function-async": 2,
-		"@typescript-eslint/no-non-null-assertion": "off",
-		"no-restricted-imports": [
-			"error",
-			{
-				"patterns": ["**/data/characters"]
-			}
-		]
+		"@typescript-eslint/no-non-null-assertion": "off"
 	}
 }
