@@ -1,7 +1,7 @@
 {
 	"name": "drpg-utils",
 	"description": "Common functions used by the DRPG Suite",
-	"version": "0.0.0-dev",
+	"version": "2.0.0",
 	"author": "Bejasc",
 	"repository": {
 		"type": "git",
@@ -23,32 +23,32 @@
 		"prepare": "husky install"
 	},
 	"dependencies": {
-		"drpg-logger": "^1.3.1",
+		"drpg-logger": "^2.0.1",
 		"hjson": "^3.2.2",
-		"moment": "^2.29.3",
+		"moment": "^2.29.4",
 		"numeral": "^2.0.6",
-		"typescript": "^4.6.3"
+		"typescript": "^5.0.4"
 	},
 	"devDependencies": {
-		"@sapphire/eslint-config": "^4.3.0",
+		"@sapphire/eslint-config": "^4.4.2",
 		"@types/string-similarity": "^4.0.0",
-		"@typescript-eslint/eslint-plugin": "^5.15.0",
-		"@typescript-eslint/parser": "^5.15.0",
-		"dotenv": "^16.0.0",
-		"eslint": "^8.11.0",
-		"eslint-config-prettier": "^8.5.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.6",
+		"@typescript-eslint/parser": "^5.59.6",
+		"dotenv": "^16.0.3",
+		"eslint": "^8.41.0",
+		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-no-loops": "^0.3.0",
 		"eslint-plugin-no-secrets": "^0.8.9",
-		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-promise": "^6.0.0",
-		"eslint-plugin-sonarjs": "^0.12.0",
-		"eslint-plugin-unicorn": "^41.0.0",
-		"husky": "^7.0.4",
-		"lint-staged": "^12.3.6",
-		"prettier": "^2.6.0",
-		"prettier-plugin-organize-imports": "^2.3.4",
-		"tsc-watch": "^5.0.3",
-		"typescript": "^4.6.3"
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-promise": "^6.1.1",
+		"eslint-plugin-sonarjs": "^0.19.0",
+		"eslint-plugin-unicorn": "^47.0.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.2",
+		"prettier": "^2.8.8",
+		"prettier-plugin-organize-imports": "^3.2.2",
+		"tsc-watch": "^6.0.4",
+		"typescript": "^5.0.4"
 	},
 	"engines": {
 		"node": ">=16.6.0",
