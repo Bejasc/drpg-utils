@@ -215,13 +215,15 @@ export function groupByProperty<T>(objects: T[], propertyPath: string): { group:
 	const groupedMap = new Map<any, T[]>();
 
 	for (const obj of objects) {
-		const value = getProperty(obj, propertyPath);
-		const group = value !== undefined ? value : null;
+		const property = getProperty(obj, propertyPath);
+		const group = Array.isArray(property) ? property[0] : property;
+
+		const value = obj;
 
 		if (groupedMap.has(group)) {
-			groupedMap.get(group)!.push(obj);
+			groupedMap.get(group)!.push(value);
 		} else {
-			groupedMap.set(group, [obj]);
+			groupedMap.set(group, [value]);
 		}
 	}
 
