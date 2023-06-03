@@ -86,7 +86,7 @@ export class DiscardablePromise<T> {
 		this.promise = new Promise<T>((resolve, reject) => {
 			promise
 				// eslint-disable-next-line promise/prefer-await-to-then
-				.then((...args) => {
+				.then(async (...args) => {
 					if (this.discarded) return Promise.reject(new Error("Discarded"));
 
 					return resolve(...args);
@@ -172,4 +172,53 @@ export function stringTitleCase(value: string): string {
 
 export function valueIsString(value: unknown): boolean {
 	return typeof value === "string";
+}
+
+export type SortOrder = "ascending" | "descending";
+
+/**
+ * Pass the object type (as generic) and the path to the object ie tradeProperties.baseValue to sort on any property
+ * @param objects Array of the objects to sort
+ * @param propertyPath Path to the property. Supports top level and nesting.
+ * @param order Ascending or Descending
+ * @returns Array of <T>, sorted based on preference above
+ */
+export function sortByProperty<T>(objects: T[], propertyPath: string, order: SortOrder = "ascending"): T[] {
+	const sortedObjects = [...objects];
+
+	sortedObjects.sort((a, b) => {
+		const propA = getProperty(a, propertyPath);
+		const propB = getProperty(b, propertyPath);
+
+		if (propA < propB) {
+			return order === "ascending" ? -1 : 1;
+		} else if (propA > propB) {
+			return order === "ascending" ? 1 : -1;
+		} else {
+			return 0;
+		}
+	});
+
+	return sortedObjects;
+}
+
+/**
+ * Take in any object, and return the value at the matching property path
+ * @param obj
+ * @param propertyPath Path to the property. Allows top level or any nesting following dot notation
+ * @returns Value at property path. Casting may be required
+ */
+function getProperty(obj: unknown, propertyPath: string): unknown {
+	const properties = propertyPath.split(".");
+	let value = obj;
+
+	for (const prop of properties) {
+		value = value[prop];
+
+		if (value === undefined) {
+			break;
+		}
+	}
+
+	return value;
 }
