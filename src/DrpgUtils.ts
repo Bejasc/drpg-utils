@@ -203,6 +203,29 @@ export function sortByProperty<T>(objects: T[], propertyPath: string, order: Sor
 }
 
 /**
+ * Pass the object type (as generic) and the path to the object ie tradeProperties.category to split the incomign array into multiple arrays based on unique values in the provided path
+ * @param objects Array of the objects to sort
+ * @param propertyPath Path to the property. Supports top level and nesting.
+ * @returns
+ */
+export function groupByProperty<T>(objects: T[], propertyPath: string): T[][] {
+	const groupedMap = new Map<unknown, T[]>();
+
+	for (const obj of objects) {
+		const value = getProperty(obj, propertyPath);
+		const group = groupedMap.get(value);
+
+		if (group) {
+			group.push(obj);
+		} else {
+			groupedMap.set(value, [obj]);
+		}
+	}
+
+	return Array.from(groupedMap.values());
+}
+
+/**
  * Take in any object, and return the value at the matching property path
  * @param obj
  * @param propertyPath Path to the property. Allows top level or any nesting following dot notation
