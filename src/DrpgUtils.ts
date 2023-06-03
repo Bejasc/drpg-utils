@@ -183,7 +183,7 @@ export function valueIsString(value: unknown): boolean {
  * @param order Ascending or Descending
  * @returns Array of <T>, sorted based on preference above
  */
-function sortByProperty<T>(objects: T[], propertyPath: string, order: "ascending" | "descending"): T[] {
+export function sortByProperty<T>(objects: T[], propertyPath: string, order: "ascending" | "descending"): T[] {
 	return objects.slice().sort((a, b) => {
 		const valueA = getProperty(a, propertyPath);
 		const valueB = getProperty(b, propertyPath);
@@ -211,7 +211,7 @@ function sortByProperty<T>(objects: T[], propertyPath: string, order: "ascending
  * @param propertyPath Path to the property. Supports top level and nesting.
  * @returns
  */
-function groupByProperty<T>(objects: T[], propertyPath: string): { group: any; value: T[] }[] {
+export function groupByProperty<T>(objects: T[], propertyPath: string): { group: any; value: T[] }[] {
 	const groupedMap = new Map<any, T[]>();
 
 	for (const obj of objects) {
