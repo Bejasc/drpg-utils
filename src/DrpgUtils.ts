@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-loops/no-loops */
 import numeral from "numeral";
 
 /**
@@ -174,8 +176,6 @@ export function valueIsString(value: unknown): boolean {
 	return typeof value === "string";
 }
 
-export type SortOrder = "ascending" | "descending";
-
 /**
  * Pass the object type (as generic) and the path to the object ie tradeProperties.baseValue to sort on any property
  * @param objects Array of the objects to sort
@@ -183,23 +183,26 @@ export type SortOrder = "ascending" | "descending";
  * @param order Ascending or Descending
  * @returns Array of <T>, sorted based on preference above
  */
-export function sortByProperty<T>(objects: T[], propertyPath: string, order: SortOrder = "ascending"): T[] {
-	const sortedObjects = [...objects];
+function sortByProperty<T>(objects: T[], propertyPath: string, order: "ascending" | "descending"): T[] {
+	return objects.slice().sort((a, b) => {
+		const valueA = getProperty(a, propertyPath);
+		const valueB = getProperty(b, propertyPath);
 
-	sortedObjects.sort((a, b) => {
-		const propA = getProperty(a, propertyPath);
-		const propB = getProperty(b, propertyPath);
-
-		if (propA < propB) {
+		if (valueA === null || valueA === undefined) {
 			return order === "ascending" ? -1 : 1;
-		} else if (propA > propB) {
-			return order === "ascending" ? 1 : -1;
-		} else {
-			return 0;
 		}
-	});
+		if (valueB === null || valueB === undefined) {
+			return order === "ascending" ? 1 : -1;
+		}
 
-	return sortedObjects;
+		if (valueA < valueB) {
+			return order === "ascending" ? -1 : 1;
+		}
+		if (valueA > valueB) {
+			return order === "ascending" ? 1 : -1;
+		}
+		return 0;
+	});
 }
 
 /**
@@ -208,11 +211,17 @@ export function sortByProperty<T>(objects: T[], propertyPath: string, order: Sor
  * @param propertyPath Path to the property. Supports top level and nesting.
  * @returns
  */
-export function groupByProperty<T>(objects: T[], propertyPath: string): T[][] {
-	const groupedMap = new Map<unknown, T[]>();
+function groupByProperty<T>(objects: T[], propertyPath: string): { group: any; value: T[] }[] {
+	const groupedMap = new Map<any, T[]>();
 
 	for (const obj of objects) {
 		const value = getProperty(obj, propertyPath);
+
+		// Skip objects with null or undefined property value
+		if (value === null || value === undefined) {
+			continue;
+		}
+
 		const group = groupedMap.get(value);
 
 		if (group) {
@@ -222,7 +231,7 @@ export function groupByProperty<T>(objects: T[], propertyPath: string): T[][] {
 		}
 	}
 
-	return Array.from(groupedMap.values());
+	return Array.from(groupedMap.entries()).map(([group, value]) => ({ group, value }));
 }
 
 /**
@@ -231,17 +240,16 @@ export function groupByProperty<T>(objects: T[], propertyPath: string): T[][] {
  * @param propertyPath Path to the property. Allows top level or any nesting following dot notation
  * @returns Value at property path. Casting may be required
  */
-function getProperty(obj: unknown, propertyPath: string): unknown {
+function getProperty(object: any, propertyPath: string): any {
 	const properties = propertyPath.split(".");
-	let value = obj;
 
-	for (const prop of properties) {
-		value = value[prop];
-
-		if (value === undefined) {
-			break;
+	for (const property of properties) {
+		if (object && property in object) {
+			object = object[property];
+		} else {
+			return undefined;
 		}
 	}
 
-	return value;
+	return object;
 }
