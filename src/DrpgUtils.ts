@@ -216,18 +216,12 @@ export function groupByProperty<T>(objects: T[], propertyPath: string): { group:
 
 	for (const obj of objects) {
 		const value = getProperty(obj, propertyPath);
+		const group = value !== undefined ? value : null;
 
-		// Skip objects with null or undefined property value
-		if (value === null || value === undefined) {
-			continue;
-		}
-
-		const group = groupedMap.get(value);
-
-		if (group) {
-			group.push(obj);
+		if (groupedMap.has(group)) {
+			groupedMap.get(group)!.push(obj);
 		} else {
-			groupedMap.set(value, [obj]);
+			groupedMap.set(group, [obj]);
 		}
 	}
 
