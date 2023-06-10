@@ -172,6 +172,11 @@ export function stringTitleCase(value: string): string {
 		.join(" ");
 }
 
+/** Include the leading + in a number  */
+export function stringifyNumber(value: number): string {
+	return `${value > 0 ? "+" : ""}${value}`;
+}
+
 export function valueIsString(value: unknown): boolean {
 	return typeof value === "string";
 }

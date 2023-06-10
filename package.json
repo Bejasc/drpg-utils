@@ -1,7 +1,7 @@
 {
 	"name": "drpg-utils",
 	"description": "Common functions used by the DRPG Suite",
-	"version": "2.2.5",
+	"version": "2.3.0",
 	"author": "Bejasc",
 	"repository": {
 		"type": "git",
