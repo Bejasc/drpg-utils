@@ -1,0 +1,14 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"prettier.useTabs": true,
+	"prettier.printWidth": 180,
+	"editor.formatOnSave": true,
+	"editor.lineNumbers": "on",
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
+	"colorize.include": ["**/*.ts", "**/*.json", "**/*.css", "**/*.scss", "**/*.sass", "**/*.less", "**/*.styl"],
+	"colorize.languages": ["json", "typescript", "javascript", "css", "sass", "scss", "less", "postcss", "sss", "stylus", "xml", "svg"],
+	"discord.enabled": true,
+	"window.zoomLevel": 0,
+	"background.editorBackgrounds": ["https://cdn.discordapp.com/attachments/964178424258236466/1018335895918747699/Wallpapertest.png"]
+}

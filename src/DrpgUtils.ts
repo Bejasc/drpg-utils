@@ -254,3 +254,92 @@ function getProperty(object: any, propertyPath: string): any {
 
 	return object;
 }
+
+export function renderBar({
+	current,
+	max,
+	steps = 10,
+	emptyChar = "░",
+	fullChar = "█",
+	includePercentage = false,
+	prefix,
+}: {
+	current: number;
+	max: number;
+	steps?: number;
+	emptyChar?: string;
+	fullChar?: string;
+	includePercentage?: boolean;
+	prefix?: string;
+}): string {
+	const percentage = current > 0 ? current / max : 0;
+	const fullBars = Math.floor(percentage * steps);
+	const emptyBars = steps - fullBars;
+
+	let result = `**[**${fullChar.repeat(fullBars)}${emptyChar.repeat(emptyBars)}**]**`;
+
+	if (prefix) result = `${prefix}: ` + result;
+	if (includePercentage) result = result + ` ${percentage * 100}%`;
+
+	return result;
+}
+
+export function isNumber(value): boolean {
+	return !isNaN(parseFloat(value)) && !isNaN(value - 0);
+}
+
+export function generateGUID(): string {
+	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+		const r = (Math.random() * 16) | 0;
+		const v = c === "x" ? r : (r & 0x3) | 0x8;
+		return v.toString(16);
+	});
+}
+
+export function countAppearances<T>(arr: T[]): { value: T; count: number }[] {
+	const counts: Map<string, { value: T; count: number }> = new Map();
+
+	// eslint-disable-next-line no-loops/no-loops
+	for (const item of arr) {
+		const key = JSON.stringify(item);
+		if (counts.has(key)) {
+			counts.get(key)!.count++;
+		} else {
+			counts.set(key, { value: item, count: 1 });
+		}
+	}
+
+	return Array.from(counts.values());
+}
+
+export function shuffleArray<T>(array: T[]): T[] {
+	const shuffledArray = [...array];
+
+	// eslint-disable-next-line no-loops/no-loops
+	for (let i = shuffledArray.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+	}
+
+	return shuffledArray;
+}
+
+export function getNumberWithSuffix(number: number): string {
+	const lastDigit = number % 10;
+	const secondLastDigit = Math.floor((number % 100) / 10);
+
+	if (secondLastDigit === 1) {
+		return number + "th";
+	}
+
+	switch (lastDigit) {
+		case 1:
+			return number + "st";
+		case 2:
+			return number + "nd";
+		case 3:
+			return number + "rd";
+		default:
+			return number + "th";
+	}
+}
